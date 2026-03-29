@@ -20,23 +20,38 @@ const tasks = require("./routes/taskRoutes");
 const app = express();
 
 // Enable CORS
-// Support comma-separated list in CORS_ORIGIN env var (e.g. "http://localhost:3001,https://my-frontend.vercel.app")
-const rawCors = process.env.CORS_ORIGIN || "http://localhost:3001";
-const allowedOrigins = rawCors
+// Added the Vercel frontend URL explicitly to the default list.
+const defaultOrigins = [
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "https://anthing-ai-assignment.vercel.app"
+];
+
+const envOrigins = (process.env.CORS_ORIGIN || "")
   .split(",")
   .map((o) => o.trim())
   .filter(Boolean);
+
+const allowedOrigins = [...new Set([...defaultOrigins, ...envOrigins])];
+
 app.use(
   cors({
     origin: (origin, callback) => {
       // Allow requests with no origin like mobile apps or curl
       if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) return callback(null, true);
-      return callback(new Error(`CORS policy: Origin ${origin} not allowed`));
+      
+      if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        // Log the denied origin for debugging on Render
+        console.warn(`Blocked origin: ${origin}`);
+        callback(null, false);
+      }
     },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin"],
     credentials: true,
+    optionsSuccessStatus: 200 // Some legacy browsers crash on 204
   }),
 );
 
