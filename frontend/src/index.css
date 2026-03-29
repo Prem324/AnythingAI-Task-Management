@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-plus: "Plus Jakarta Sans", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+  
+  --color-primary: #6366f1;
+  --color-secondary: #0ea5e9;
+  --color-accent: #f43f5e;
+  
+  --shadow-premium: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+  
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
+  --radius-5xl: 3rem;
+}
+
+@layer base {
+  body {
+    @apply font-plus bg-slate-50 text-slate-900 antialiased;
+    background-image: 
+      radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.04) 0, transparent 40%),
+      radial-gradient(at 0% 100%, rgba(14, 165, 233, 0.04) 0, transparent 40%);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-outfit tracking-tight;
+  }
+}
+
+@utility glass {
+  @apply bg-white/75 backdrop-blur-xl border border-white/30 saturate-[180%];
+}
+
+@utility card {
+  @apply bg-white rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 overflow-hidden;
+  &:hover {
+    @apply -translate-y-1 shadow-md border-slate-200;
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-3 px-7 py-3.5 rounded-xl font-bold transition-all duration-300 active:scale-95;
+}
+
+@utility btn-primary {
+  @apply bg-gradient-to-br from-indigo-500 to-indigo-700 text-white shadow-lg shadow-indigo-100;
+  &:hover {
+    @apply -translate-y-0.5 shadow-xl shadow-indigo-200 saturate-[110%];
+  }
+}
