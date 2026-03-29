@@ -20,10 +20,20 @@ const tasks = require("./routes/taskRoutes");
 const app = express();
 
 // Enable CORS
-const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:3001";
+// Support comma-separated list in CORS_ORIGIN env var (e.g. "http://localhost:3001,https://my-frontend.vercel.app")
+const rawCors = process.env.CORS_ORIGIN || "http://localhost:3001";
+const allowedOrigins = rawCors
+  .split(",")
+  .map((o) => o.trim())
+  .filter(Boolean);
 app.use(
   cors({
-    origin: corsOrigin,
+    origin: (origin, callback) => {
+      // Allow requests with no origin like mobile apps or curl
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error(`CORS policy: Origin ${origin} not allowed`));
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
