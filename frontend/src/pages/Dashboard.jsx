@@ -95,24 +95,22 @@ const Dashboard = () => {
         <div className="min-h-screen bg-slate-50">
             <Navbar />
 
-            <main className="container mx-auto px-4 pb-20 sm:pb-8">
+            <main className="container mx-auto px-4 pb-8">
                 {/* Header Section */}
-                <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8 pt-4">
+                <header className="flex items-center justify-between gap-4 mb-8 pt-4">
                     <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
-                        <h1 className="text-3xl font-black text-slate-900 tracking-tight sm:text-4xl">
-                            Task <span className="text-indigo-600">Manager</span>
-                        </h1>
-                        <p className="text-slate-500 text-sm font-medium mt-1">Manage and track your tasks efficiently.</p>
+                        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Task Management</h1>
+                        <p className="text-slate-500 text-sm font-medium">Manage your tasks efficiently.</p>
                     </motion.div>
                     
                     <motion.button 
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={() => { setEditingTask(null); setShowForm(true); }}
-                        className="btn btn-primary px-8 py-4 text-sm sm:py-3 shadow-xl"
+                        className="btn btn-primary px-6 py-2.5 text-sm"
                     >
-                        <Plus className="w-5 h-5" />
-                        <span className="font-black uppercase tracking-wider">Add Task</span>
+                        <Plus className="w-4 h-4" />
+                        <span>Add Task</span>
                     </motion.button>
                 </header>
 
@@ -120,60 +118,58 @@ const Dashboard = () => {
                 <motion.div 
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="flex flex-col gap-4 mb-8"
+                    className="card glass p-3 mb-6 flex flex-col sm:flex-row gap-3"
                 >
-                    <div className="flex flex-col md:flex-row gap-4">
-                        <form onSubmit={handleSearch} className="relative flex-1 group">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
-                            <input
-                                type="text"
-                                placeholder="Search tasks..."
-                                value={filter.search}
-                                onChange={(e) => setFilter({ ...filter, search: e.target.value })}
-                                className="w-full pl-11 pr-4 py-3.5 bg-white border-slate-200 rounded-2xl text-sm font-semibold focus:border-indigo-400 transition-all outline-none border shadow-sm"
-                            />
-                        </form>
+                    <form onSubmit={handleSearch} className="relative flex-1">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        <input
+                            type="text"
+                            placeholder="Search tasks..."
+                            value={filter.search}
+                            onChange={(e) => setFilter({ ...filter, search: e.target.value })}
+                            className="w-full pl-9 pr-4 py-2 bg-slate-50/50 border-slate-100 rounded-lg text-sm font-medium focus:bg-white transition-all outline-none border focus:border-indigo-400"
+                        />
+                    </form>
 
-                        <div className="grid grid-cols-2 md:flex gap-3">
-                            <div className="relative flex-1 md:min-w-[160px]">
-                                <select 
-                                    value={filter.status} 
-                                    onChange={(e) => setFilter({ ...filter, status: e.target.value })}
-                                    className="w-full pl-4 pr-10 py-3.5 bg-white border-slate-200 rounded-2xl text-[11px] font-black uppercase tracking-wider appearance-none cursor-pointer focus:border-indigo-400 outline-none border shadow-sm"
-                                >
-                                    <option value="">All Status</option>
-                                    <option value="pending">Pending</option>
-                                    <option value="in-progress">In Progress</option>
-                                    <option value="completed">Completed</option>
-                                </select>
-                                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-                            </div>
-
-                            <div className="relative flex-1 md:min-w-[160px]">
-                                <select 
-                                    value={filter.priority} 
-                                    onChange={(e) => setFilter({ ...filter, priority: e.target.value })}
-                                    className="w-full pl-4 pr-10 py-3.5 bg-white border-slate-200 rounded-2xl text-[11px] font-black uppercase tracking-wider appearance-none cursor-pointer focus:border-indigo-400 outline-none border shadow-sm"
-                                >
-                                    <option value="">All Priority</option>
-                                    <option value="low">Low</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="high">High</option>
-                                    <option value="urgent">Urgent</option>
-                                </select>
-                                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-                            </div>
-                            
-                            {(filter.status || filter.priority || filter.search) && (
-                                <button 
-                                    onClick={() => setFilter({ status: '', priority: '', search: '' })}
-                                    className="p-3.5 bg-white hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-2xl transition-all border border-slate-200 shadow-sm"
-                                    title="Clear Filters"
-                                >
-                                    <FilterX className="w-5 h-5" />
-                                </button>
-                            )}
+                    <div className="flex gap-2 items-center">
+                        <div className="relative">
+                            <select 
+                                value={filter.status} 
+                                onChange={(e) => setFilter({ ...filter, status: e.target.value })}
+                                className="pl-3 pr-8 py-2 bg-slate-50/50 border-slate-100 rounded-lg text-xs font-bold appearance-none cursor-pointer focus:bg-white focus:border-indigo-400 outline-none border min-w-[120px]"
+                            >
+                                <option value="">Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                            <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
                         </div>
+
+                        <div className="relative">
+                            <select 
+                                value={filter.priority} 
+                                onChange={(e) => setFilter({ ...filter, priority: e.target.value })}
+                                className="pl-3 pr-8 py-2 bg-slate-50/50 border-slate-100 rounded-lg text-xs font-bold appearance-none cursor-pointer focus:bg-white focus:border-indigo-400 outline-none border min-w-[120px]"
+                            >
+                                <option value="">Priority</option>
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                                <option value="urgent">Urgent</option>
+                            </select>
+                            <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
+                        </div>
+                        
+                        {(filter.status || filter.priority || filter.search) && (
+                            <button 
+                                onClick={() => setFilter({ status: '', priority: '', search: '' })}
+                                className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-lg transition-all"
+                                title="Clear"
+                            >
+                                <FilterX className="w-4 h-4" />
+                            </button>
+                        )}
                     </div>
                 </motion.div>
 
