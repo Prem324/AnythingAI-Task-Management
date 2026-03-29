@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LucideUser, LucideMail, LucideLock, LucideLogIn, LucideSparkles, LucideFolderKanban, LucideShieldCheck } from 'lucide-react';
+import { User, Mail, Lock, FolderKanban, ShieldCheck, AlertCircle, ArrowRight } from 'lucide-react';
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -28,98 +28,118 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50">
-            <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-sm">
-                <div className="flex justify-center mb-6">
-                    <Link to="/" className="flex flex-col items-center gap-3 text-center group">
-                        <div className="p-3 bg-indigo-600 rounded-2xl shadow-lg shadow-indigo-100 group-hover:scale-105 transition-transform">
-                            <LucideFolderKanban className="w-7 h-7 text-white" />
+        <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50 sm:p-8">
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                className="w-full max-w-sm"
+            >
+                <div className="flex justify-center mb-10">
+                    <Link to="/" className="flex flex-col items-center gap-4 text-center group">
+                        <div className="p-4 bg-indigo-600 rounded-3xl shadow-xl shadow-indigo-200 group-hover:scale-105 transition-transform duration-500">
+                            <FolderKanban className="w-8 h-8 text-white" />
                         </div>
-                        <h1 className="text-xl font-bold text-slate-900 tracking-tight">Task Management</h1>
+                        <h1 className="text-2xl font-black text-slate-900 tracking-tight">TaskMaster <span className="text-indigo-600">Pro</span></h1>
                     </Link>
                 </div>
 
-                <div className="card p-7 bg-white rounded-3xl border-none shadow-xl">
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <div className="card p-8 bg-white/80 backdrop-blur-xl rounded-[2rem] border border-white shadow-2xl">
+                    <div className="mb-8">
+                        <h2 className="text-xl font-bold text-slate-900">Create Identity</h2>
+                        <p className="text-slate-500 text-sm">Join the professional task management fleet</p>
+                    </div>
+
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                         {error && (
-                            <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="p-3 bg-red-50 border border-red-100 rounded-xl text-red-600 text-[10px] font-bold text-center">
+                            <motion.div 
+                                initial={{ opacity: 0, scale: 0.95 }} 
+                                animate={{ opacity: 1, scale: 1 }} 
+                                className="p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-xs font-bold flex items-center gap-3"
+                            >
+                                <AlertCircle className="w-4 h-4 shrink-0" />
                                 {error}
                             </motion.div>
                         )}
 
-                        <div className="flex flex-col gap-4">
-                            <div className="flex flex-col gap-1.5">
-                                <label className="text-xs font-bold text-slate-500 pl-1 flex items-center gap-2">
-                                    <LucideUser className="w-3 h-3" />
-                                    Name
+                        <div className="space-y-5">
+                            <div className="group">
+                                <label className="text-[11px] font-black uppercase tracking-wider text-slate-400 pl-1 mb-2 block group-focus-within:text-indigo-600 transition-colors">
+                                    Full Name
                                 </label>
-                                <input
-                                    type="text"
-                                    placeholder="Your Name"
-                                    required
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    className="w-full py-2.5 px-4 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-indigo-500 text-sm font-medium transition-all outline-none"
-                                />
+                                <div className="relative">
+                                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-indigo-500 transition-colors" />
+                                    <input
+                                        type="text"
+                                        placeholder="Operational Name"
+                                        required
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        className="w-full py-3.5 pl-11 pr-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/5 text-sm font-semibold transition-all outline-none"
+                                    />
+                                </div>
                             </div>
 
-                            <div className="flex flex-col gap-1.5">
-                                <label className="text-xs font-bold text-slate-500 pl-1 flex items-center gap-2">
-                                    <LucideMail className="w-3 h-3" />
-                                    Email
+                            <div className="group">
+                                <label className="text-[11px] font-black uppercase tracking-wider text-slate-400 pl-1 mb-2 block group-focus-within:text-indigo-600 transition-colors">
+                                    Communications / Email
                                 </label>
-                                <input
-                                    type="email"
-                                    placeholder="Your Email"
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full py-2.5 px-4 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-indigo-500 text-sm font-medium transition-all outline-none"
-                                />
+                                <div className="relative">
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-indigo-500 transition-colors" />
+                                    <input
+                                        type="email"
+                                        placeholder="name@company.com"
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="w-full py-3.5 pl-11 pr-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/5 text-sm font-semibold transition-all outline-none"
+                                    />
+                                </div>
                             </div>
 
-                            <div className="flex flex-col gap-1.5">
-                                <label className="text-xs font-bold text-slate-500 pl-1 flex items-center gap-2">
-                                    <LucideLock className="w-3 h-3" />
-                                    Password
+                            <div className="group">
+                                <label className="text-[11px] font-black uppercase tracking-wider text-slate-400 pl-1 mb-2 block group-focus-within:text-indigo-600 transition-colors">
+                                    Define Passphrase
                                 </label>
-                                <input
-                                    type="password"
-                                    placeholder="Min 6 characters"
-                                    required
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full py-2.5 px-4 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-indigo-500 text-sm font-medium transition-all outline-none"
-                                />
+                                <div className="relative">
+                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-indigo-500 transition-colors" />
+                                    <input
+                                        type="password"
+                                        placeholder="Min 6 characters"
+                                        required
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        className="w-full py-3.5 pl-11 pr-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/5 text-sm font-semibold transition-all outline-none"
+                                    />
+                                </div>
                             </div>
                         </div>
 
                         <button 
                             type="submit" 
-                            disabled={loading}
-                            className="w-full btn btn-primary py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 mt-2"
+                            disabled={loading || !name || !email || !password}
+                            className="w-full btn btn-primary py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-3 mt-2 shadow-indigo-200"
                         >
                             {loading ? (
-                                <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                                <div className="w-5 h-5 border-3 border-white/20 border-t-white rounded-full animate-spin"></div>
                             ) : (
                                 <>
-                                    <span>Create Account</span>
-                                    <LucideShieldCheck className="w-4 h-4" />
+                                    <span>Initiate Protocol</span>
+                                    <ShieldCheck className="w-5 h-5" />
                                 </>
                             )}
                         </button>
                     </form>
 
-                    <div className="mt-6 text-center">
-                        <p className="text-slate-500 text-xs font-medium">
-                            Already have an account?{' '}
-                            <Link to="/login" className="text-indigo-600 hover:underline">Sign In</Link>
+                    <div className="mt-10 text-center border-t border-slate-50 pt-8">
+                        <p className="text-slate-500 text-sm font-medium">
+                            Already registered?{' '}
+                            <Link to="/login" className="text-indigo-600 font-bold hover:underline">Access Command</Link>
                         </p>
                     </div>
                 </div>
 
-                <div className="mt-6 text-center opacity-30">
-                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-800">Task Management App</span>
+                <div className="mt-8 text-center opacity-30">
+                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Secure Protocol v1.0</span>
                 </div>
             </motion.div>
         </div>

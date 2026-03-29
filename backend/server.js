@@ -40,11 +40,14 @@ app.use(
       // Allow requests with no origin like mobile apps or curl
       if (!origin) return callback(null, true);
       
-      if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes(origin)) {
+      const isVercel = origin.endsWith(".vercel.app");
+      const isAllowed = allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes(origin) || isVercel;
+
+      if (isAllowed) {
         callback(null, true);
       } else {
         // Log the denied origin for debugging on Render
-        console.warn(`Blocked origin: ${origin}`);
+        console.warn(`Blocked origin: ${origin} (Request path: ${origin})`);
         callback(null, false);
       }
     },
@@ -64,9 +67,10 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Rate limiting
+// Increased limit from 100 to 500 to prevent mobile carrier NAT blocking
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  max: 500, // Increased for mobile users
 });
 app.use("/api/", limiter);
 
