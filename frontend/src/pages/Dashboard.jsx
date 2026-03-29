@@ -100,9 +100,9 @@ const Dashboard = () => {
                 <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8 pt-4">
                     <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
                         <h1 className="text-3xl font-black text-slate-900 tracking-tight sm:text-4xl">
-                            Command <span className="text-indigo-600">Center</span>
+                            Task <span className="text-indigo-600">Manager</span>
                         </h1>
-                        <p className="text-slate-500 text-sm font-medium mt-1">Operational overview and task deployment.</p>
+                        <p className="text-slate-500 text-sm font-medium mt-1">Manage and track your tasks efficiently.</p>
                     </motion.div>
                     
                     <motion.button 
@@ -112,7 +112,7 @@ const Dashboard = () => {
                         className="btn btn-primary px-8 py-4 text-sm sm:py-3 shadow-xl"
                     >
                         <Plus className="w-5 h-5" />
-                        <span className="font-black uppercase tracking-wider">Deploy Task</span>
+                        <span className="font-black uppercase tracking-wider">Add Task</span>
                     </motion.button>
                 </header>
 
@@ -127,7 +127,7 @@ const Dashboard = () => {
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
                             <input
                                 type="text"
-                                placeholder="Search task database..."
+                                placeholder="Search tasks..."
                                 value={filter.search}
                                 onChange={(e) => setFilter({ ...filter, search: e.target.value })}
                                 className="w-full pl-11 pr-4 py-3.5 bg-white border-slate-200 rounded-2xl text-sm font-semibold focus:border-indigo-400 transition-all outline-none border shadow-sm"

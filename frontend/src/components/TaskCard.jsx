@@ -60,14 +60,14 @@ const TaskCard = ({ task, onDelete, onEdit, onStatusChange }) => {
             </div>
 
             <p className="text-sm text-slate-500 font-medium line-clamp-3 leading-relaxed mb-6 flex-1">
-                {task.description || "Experimental objectives not defined."}
+                {task.description || "No description provided."}
             </p>
 
             <div className="mt-auto flex flex-col gap-4 pt-5 border-t border-slate-50">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-wider">
                         <Clock className="w-3.5 h-3.5 text-slate-300" />
-                        <span>Deadline: {formatDate(task.dueDate)}</span>
+                        <span>Due Date: {formatDate(task.dueDate)}</span>
                     </div>
                     <div className={`px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-[0.1em] border shadow-xs ${getStatusStyles(task.status)}`}>
                         {task.status}

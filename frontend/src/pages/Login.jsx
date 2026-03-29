@@ -43,14 +43,14 @@ const Login = () => {
                         <div className="p-4 bg-indigo-600 rounded-3xl shadow-xl shadow-indigo-200 group-hover:scale-105 transition-transform duration-500">
                             <FolderKanban className="w-8 h-8 text-white" />
                         </div>
-                        <h1 className="text-2xl font-black text-slate-900 tracking-tight">TaskMaster <span className="text-indigo-600">Pro</span></h1>
+                        <h1 className="text-2xl font-black text-slate-900 tracking-tight">Task <span className="text-indigo-600">Manager</span></h1>
                     </Link>
                 </div>
 
                 <div className="card p-8 bg-white/80 backdrop-blur-xl rounded-[2rem] border border-white shadow-2xl">
                     <div className="mb-8">
                         <h2 className="text-xl font-bold text-slate-900">Welcome Back</h2>
-                        <p className="text-slate-500 text-sm">Sign in to manage your workstation</p>
+                        <p className="text-slate-500 text-sm">Sign in to your account</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-6" id="login-form">
@@ -68,7 +68,7 @@ const Login = () => {
                         <div className="space-y-5">
                             <div className="group">
                                 <label htmlFor="email" className="text-[11px] font-black uppercase tracking-wider text-slate-400 pl-1 mb-2 block group-focus-within:text-indigo-600 transition-colors">
-                                    Identity / Email
+                                    Email Address
                                 </label>
                                 <div className="relative">
                                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-indigo-500 transition-colors" />
@@ -76,7 +76,7 @@ const Login = () => {
                                         id="email"
                                         type="email"
                                         autoComplete="email"
-                                        placeholder="name@company.com"
+                                        placeholder="email@example.com"
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
@@ -87,7 +87,7 @@ const Login = () => {
 
                             <div className="group">
                                 <label htmlFor="password" className="text-[11px] font-black uppercase tracking-wider text-slate-400 pl-1 mb-2 block group-focus-within:text-indigo-600 transition-colors">
-                                    Security Credentials
+                                    Password
                                 </label>
                                 <div className="relative">
                                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-indigo-500 transition-colors" />
@@ -95,7 +95,7 @@ const Login = () => {
                                         id="password"
                                         type="password"
                                         autoComplete="current-password"
-                                        placeholder="••••••••"
+                                        placeholder="Enter password"
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
@@ -114,7 +114,7 @@ const Login = () => {
                                 <div className="w-5 h-5 border-3 border-white/20 border-t-white rounded-full animate-spin"></div>
                             ) : (
                                 <>
-                                    <span>Access Panel</span>
+                                    <span>Sign In</span>
                                     <LogIn className="w-5 h-5" />
                                 </>
                             )}
@@ -123,14 +123,14 @@ const Login = () => {
 
                     <div className="mt-10 text-center border-t border-slate-50 pt-8">
                         <p className="text-slate-500 text-sm font-medium">
-                            New operative?{' '}
-                            <Link to="/register" className="text-indigo-600 font-bold hover:underline">Request Access</Link>
+                            Don't have an account?{' '}
+                            <Link to="/register" className="text-indigo-600 font-bold hover:underline">Register</Link>
                         </p>
                     </div>
                 </div>
 
                 <div className="mt-8 text-center opacity-30">
-                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Secure Protocol v1.0</span>
+                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Task Management App</span>
                 </div>
             </motion.div>
         </div>

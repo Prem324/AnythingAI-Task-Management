@@ -22,8 +22,8 @@ const Navbar = () => {
                         <FolderKanban className="w-5 h-5 text-white" />
                     </div>
                     <div className="flex flex-col -gap-1">
-                        <span className="text-base font-black text-slate-900 tracking-tight leading-none">TaskMaster</span>
-                        <span className="text-[9px] font-black text-indigo-500 uppercase tracking-[0.2em] leading-none">Professional</span>
+                        <span className="text-base font-black text-slate-900 tracking-tight leading-none">Task</span>
+                        <span className="text-[9px] font-black text-indigo-500 uppercase tracking-[0.2em] leading-none">Manager</span>
                     </div>
                 </Link>
 
@@ -97,14 +97,14 @@ const Navbar = () => {
                                             className="w-full py-4 rounded-3xl bg-red-50 text-red-600 font-bold text-sm flex items-center justify-center gap-3 transition-colors active:bg-red-100"
                                         >
                                             <LogOut className="w-5 h-5" />
-                                            <span>Terminate Session</span>
+                                            <span>Sign Out</span>
                                         </button>
                                     </div>
                                 </>
                             ) : (
                                 <div className="flex flex-col gap-4">
                                     <Link to="/login" onClick={() => setIsMenuOpen(false)} className="w-full text-center py-4 text-sm font-black uppercase tracking-widest text-slate-600 bg-slate-50 rounded-2xl">Sign In</Link>
-                                    <Link to="/register" onClick={() => setIsMenuOpen(false)} className="btn btn-primary w-full py-4 rounded-2xl text-sm shadow-xl">Join the Fleet</Link>
+                                    <Link to="/register" onClick={() => setIsMenuOpen(false)} className="btn btn-primary w-full py-4 rounded-2xl text-sm shadow-xl">Get Started</Link>
                                 </div>
                             )}
                         </motion.div>
